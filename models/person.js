@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var PersonSchema = new Schema({
     email: {type: String, index: true},
+    present: {type: Boolean},
     group: {type: String}
 });
 

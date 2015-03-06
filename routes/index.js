@@ -5,7 +5,7 @@ var _ = require('underscore');
 
 router.get('/', function (req, res, next) {
     var shufflePeople = function (callback) {
-        Person.find({}, function (err, people) {
+        Person.find({present: true}, function (err, people) {
             people = _.shuffle(people);
             var i, j, tmpArray;
             var chunk = 4;
@@ -32,16 +32,17 @@ router.get('/', function (req, res, next) {
 
 router.get('/import', function (req, res, next) {
     var createPerson = function (index) {
-        var department = index % 2 == 0 ? 'IT' : 'Sales';
+        var department = _.sample(['IT', 'Sales', 'OPS', 'HR'], 1);
         var person = new Person;
         person.email = 'random.person+' + index + '@gmail.com';
+        person.present = true;
         person.group = department;
 
         person.save();
     };
 
     Person.remove({}, function (err, res) {
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < 98; i++) {
             createPerson(i);
         }
     });
