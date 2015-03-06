@@ -3,7 +3,6 @@ var router = express.Router();
 var Person = require('../models/person').Person;
 var _ = require('underscore');
 
-/* GET home page. */
 router.get('/', function (req, res, next) {
     var shufflePeople = function (callback) {
         Person.find({}, function (err, people) {
