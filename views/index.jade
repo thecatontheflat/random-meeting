@@ -1,8 +1,9 @@
 extends layout
 
 block content
-    table.table.table-striped
-        for person in people
-            tr: td #{person.email}
-
-
+    for group in groups
+        table.table.table-striped
+            for person in group
+                tr
+                    td #{person.email}
+                    td #{person.group}
